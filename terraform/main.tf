@@ -84,9 +84,9 @@ resource "null_resource" "inventory" {
     module.aurora
   ]
   provisioner "local-exec" {
-    command = <<EOT
-      echo "[Jenkins_server]" > inventory
-      echo "${module.jenkins.public_ip}" >> inventory
+    command = <<-EOT
+    echo "[Jenkins_server]" > inventory
+    echo "${module.jenkins.public_ip}" >> inventory
     EOT
      working_dir = "${path.module}/../ansible"
   }

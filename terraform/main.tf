@@ -88,7 +88,7 @@ resource "null_resource" "inventory" {
       echo "[Jenkins_server]" > inventory
       echo "${module.jenkins.public_ip}" > inventory
     EOT
-    working_dir = path.cwd
+     working_dir = "${path.module}/../ansible"
   }
 }
 

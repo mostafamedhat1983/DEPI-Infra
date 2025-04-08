@@ -86,7 +86,7 @@ resource "null_resource" "inventory" {
   provisioner "local-exec" {
     command = <<EOT
       echo "[Jenkins_server]" > inventory
-      echo "${module.jenkins.public_ip}" > inventory
+      echo "${module.jenkins.public_ip}" >> inventory
     EOT
      working_dir = "${path.module}/../ansible"
   }

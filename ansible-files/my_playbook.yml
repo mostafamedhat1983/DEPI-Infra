@@ -1,7 +1,7 @@
 # -------------------- Install and configure Jenkins --------------------
 
 - name: Install and configure Jenkins
-  hosts: jenkins_servers            #jenkins_servers group from the inventory file.
+  hosts: jenkins_server            #jenkins_servers group from the inventory file.
   become: yes                       #Run tasks with elevated privileges (root)
   become_method: sudo               #Specifies using sudo for privilege escalation
   become_user: root                 
@@ -57,7 +57,7 @@
 # -------------------- Install Docker --------------------
 
 - name: Install Docker
-  hosts: docker_hosts
+  hosts: jenkins_server
   become: yes
   become_method: sudo
   become_user: root
@@ -99,7 +99,7 @@
 # -------------------- Install kubectl --------------------
 
 - name: Install kubectl
-  hosts: kubectl_hosts
+  hosts: jenkins_server
   become: yes
   become_method: sudo
   become_user: root

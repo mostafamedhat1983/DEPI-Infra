@@ -77,49 +77,41 @@ module "eks" {
 }
 
 # Output to file --> Inventory file structure for Ansible
-resource "null_resource" "inventory" {
+resource "local_file" "inventory" {
+  content = <<-EOT
+  [jenkins]
+  ${module.jenkins.public_ip} ansible_user=ubuntu ansible_private_key_file=/var/lib/jenkins/jenkins-key.pem
+  EOT
+  filename = "${path.cwd}/../ansible/inventory"
   depends_on = [
     module.eks,
     module.jenkins,
     module.aurora
   ]
-  provisioner "local-exec" {
-    command = <<-EOT
-    echo "[Jenkins_server]" > inventory
-    echo "${module.jenkins.public_ip} ansible_user=ubuntu ansible_private_key_file= " >> inventory
-    EOT
-     working_dir = "${path.module}/../ansible"
-  }
 }
 
 # Output to file --> EKS Data
-resource "null_resource" "EKS-Data" {
+resource "local_file" "eks_data" {
+  content = <<-EOT
+  Cluster Name: ${module.eks.cluster_name}
+  Endpoint: ${module.eks.cluster_endpoint}
+  Certificate: ${module.eks.cluster_certificate_authority}
+  EOT
+  filename = "${path.cwd}/EKS-Data"
   depends_on = [
     module.eks,
     module.jenkins,
     module.aurora
   ]
-  provisioner "local-exec" {
-    command = <<EOT
-      echo "Cluster Name: ${module.eks.cluster_name}" >> EKS-Data
-      echo "Endpoint: ${module.eks.cluster_endpoint}" >> EKS-Data
-      echo "Certificate: ${module.eks.cluster_certificate_authority}" >> EKS-Data
-    EOT
-    working_dir = path.cwd
-  }
 }
 
 # Output to file --> Aurora_DB
-resource "null_resource" "Aurora-Data" {
+resource "local_file" "aurora_data" {
+  content  = "Endpoint: ${module.aurora.endpoint}"
+  filename = "${path.cwd}/Aurora-Data"
   depends_on = [
     module.eks,
     module.jenkins,
     module.aurora
   ]
-  provisioner "local-exec" {
-    command = <<EOT
-      echo "Endpoint: ${module.aurora.endpoint}" >> Aurora-Data
-    EOT
-    working_dir = path.cwd
-  }
 }

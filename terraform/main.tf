@@ -65,7 +65,8 @@ module "aurora" {
 module "eks" {
   source          = "./modules/eks"
   cluster_name    = "python-app-cluster"
-  subnets         = concat(module.vpc.public_subnets, module.vpc.private_subnets)
+  #subnets         = concat(module.vpc.public_subnets, module.vpc.private_subnets)
+  subnets         = module.vpc.public_subnets
   security_groups = [module.security_groups.web_sg_id]
   node_group_name = "python-app-nodes"
   node_type       = "t3.medium"
@@ -73,7 +74,7 @@ module "eks" {
   key_name        = module.ssh_key.key_name
   min_size        = 1
   max_size        = 3
-  desired_size    = 2
+  desired_size    = 1
 }
 
 # Output to file --> Inventory file structure for Ansible
@@ -95,7 +96,7 @@ resource "local_file" "eks_data" {
   content = <<-EOT
   Cluster Name: ${module.eks.cluster_name}
   Endpoint: ${module.eks.cluster_endpoint}
-  Certificate: ${module.eks.cluster_certificate_authority}
+  Certificate: ${module.eks.cluster_certificate}
   EOT
   filename = "${path.cwd}/EKS-Data"
   depends_on = [

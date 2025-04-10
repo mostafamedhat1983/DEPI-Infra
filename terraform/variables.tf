@@ -15,6 +15,14 @@ variable "key_name" {
   default = "jenkins-key"
 }
 
+variable "app_name" {
+  default = "python-app"
+}
+
+variable "app_port" {
+  default = 5000
+}
+
 variable "db_name" {
   default = "todo_db"
 }

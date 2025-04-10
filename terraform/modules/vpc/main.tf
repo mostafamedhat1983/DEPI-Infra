@@ -39,8 +39,46 @@ resource "aws_subnet" "private" {
   tags = {
     Name = "${var.name}-private-${var.azs[count.index]}"
     "kubernetes.io/role/internal-elb" = "1"
-    "kubernetes.io/cluster/${var.cluster_name}" = "owned"
+    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
   }
+}
+
+resource "aws_eip" "nat" {
+  count = length(var.azs)
+  vpc   = true
+  depends_on = [aws_internet_gateway.this]
+}
+
+resource "aws_nat_gateway" "this" {
+  count         = length(var.azs) 
+  allocation_id = aws_eip.nat[count.index].id
+  subnet_id     = aws_subnet.public[count.index].id 
+
+  tags = {
+    Name = "${var.name}-nat-${var.azs[count.index]}"
+  }
+
+  depends_on = [aws_internet_gateway.this]
+}
+
+resource "aws_route_table" "private" {
+  count  = length(var.azs) 
+  vpc_id = aws_vpc.this.id
+
+  route {
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.this[count.index].id
+  }
+
+  tags = {
+    Name = "${var.name}-private-rt-${var.azs[count.index]}"
+  }
+}
+
+resource "aws_route_table_association" "private" {
+  count          = length(var.azs)
+  subnet_id      = aws_subnet.private[count.index].id
+  route_table_id = aws_route_table.private[count.index].id
 }
 
 resource "aws_route_table" "public" {

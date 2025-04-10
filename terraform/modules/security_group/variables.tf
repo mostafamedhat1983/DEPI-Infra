@@ -9,6 +9,6 @@ variable "vpc_id" {
 }
 
 variable "cluster_security_group_id" {
-  description = "The security group ID of the EKS cluster"
+  description = "EKS cluster security group ID"
   type        = string
 }

@@ -80,8 +80,8 @@ module "eks" {
 # Output to file --> Inventory file structure for Ansible
 resource "local_file" "inventory" {
   content = <<-EOT
-  [jenkins]
-  ${module.jenkins.public_ip} ansible_user=ubuntu ansible_private_key_file=/var/lib/jenkins/jenkins-key.pem
+  [jenkins_server]
+  ${module.jenkins.public_ip} ansible_user=ubuntu ansible_private_key_file=../terraform/modules/key_pair/jenkins-key.pem
   EOT
   filename = "${path.cwd}/../ansible/inventory"
   depends_on = [

@@ -8,7 +8,7 @@ variable "azs" {
 }
 
 variable "ami" {
-  default = "ami-00c257e12d6828491"
+  default = "ami-075686beab831bb7f"
 }
 
 variable "key_name" {

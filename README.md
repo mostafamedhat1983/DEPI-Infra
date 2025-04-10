@@ -19,17 +19,61 @@ This Terraform project provisions a complete AWS infrastructure including:
 - Git
 
 ## 🚀 Quick Start
-
+### 1. Clone repository
 ```bash
-# Clone repository
 git clone https://github.com/mostafamedhat1983/DEPI-Infra.git
 cd your-repo
-
-# Initialize Terraform
+```
+### 2. Initialize Terraform
+```bash
 terraform init
-
-# Review execution plan
+```
+### 3. Configure variables
+Create/edit terraform.tfvars:
+```bash
+db_username = "admin"
+db_password = "your_secure_password_here"
+```
+### 4. Deploy infrastructure
+```bash
 terraform plan
-
-# Deploy infrastructure
 terraform apply
+```
+## 📂 Project Structure
+```bash
+.
+├── modules/
+│   ├── aurora/          # Database resources
+│   ├── eks/             # Kubernetes cluster
+│   ├── instances/       # EC2 configurations
+│   ├── key_pair/        # SSH key management
+│   ├── security_group/  # Network security
+│   └── vpc/            # Networking
+├── main.tf              # Root module
+├── variables.tf         # Input variables
+├── outputs.tf           # Output values
+└── README.md           # This file
+```
+## ⚙️ Configuration
+![image](https://github.com/user-attachments/assets/fba1b838-3085-4e9d-89af-ddf37287beb3)
+## 🔌 Accessing Resources
+### After deployment:
+#### Connect to Jenkins
+```bash
+ssh -i ./modules/key_pair/jenkins-key.pem ubuntu@$(terraform output -raw jenkins_ip)
+```
+#### Configure kubectl
+```bash
+aws eks update-kubeconfig \
+  --name $(terraform output -raw cluster_name) \
+  --region $(terraform output -raw region)
+```
+#### Database Connection
+```bash
+echo "Aurora endpoint: $(terraform output -raw aurora_endpoint)"
+```
+## 🧹 Cleanup
+### To destroy all resources:
+```bash
+terraform destroy
+```

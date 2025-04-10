@@ -1,36 +1,41 @@
 variable "region" {
-  default = "us-west-2"
+  description = "AWS region to deploy resources."
+  type        = string
+  default     = "us-west-2"
 }
 
 variable "azs" {
-  type    = list(string)
-  default = ["a", "b", "c"]
+  description = "List of Availability Zone suffixes (e.g., ['a', 'b', 'c']) within the region."
+  type        = list(string)
+  default     = ["a", "b", "c"]
 }
 
 variable "ami" {
-  default = "ami-075686beab831bb7f"
+  description = "AMI ID for the Jenkins EC2 instance (ensure it's compatible with the region and instance type)."
+  type        = string
+  default     = "ami-075686beab831bb7f"
 }
 
 variable "key_name" {
-  default = "jenkins-key"
-}
-
-variable "app_name" {
-  default = "python-app"
-}
-
-variable "app_port" {
-  default = 5000
+  description = "Desired name for the EC2 key pair."
+  type        = string
+  default     = "jenkins-key"
 }
 
 variable "db_name" {
-  default = "todo_db"
+  description = "Name for the Aurora database."
+  type        = string
+  default     = "todo_db"
 }
 
 variable "db_username" {
-  sensitive = true
+  description = "Master username for the Aurora database."
+  type        = string
+  sensitive   = true
 }
 
 variable "db_password" {
-  sensitive = true
+  description = "Master password for the Aurora database."
+  type        = string
+  sensitive   = true
 }

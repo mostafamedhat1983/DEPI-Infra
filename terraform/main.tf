@@ -169,7 +169,7 @@ resource "aws_security_group_rule" "nodes_to_cluster" {
 resource "local_file" "inventory" {
   content = <<-EOT
 [jenkins_server]
-${module.jenkins.public_ip} ansible_user=ubuntu ansible_ssh_private_key_file=${module.ssh_key.private_key_filename}
+${module.jenkins.public_ip} ansible_user=ubuntu ansible_ssh_private_key_file=../terraform/modules/key_pair/jenkins-key.pem
 EOT
   filename = "${path.cwd}/../ansible/inventory"
 

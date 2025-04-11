@@ -226,6 +226,14 @@
     - name: Run update-kubeconfig command
       command: aws eks update-kubeconfig --name python-app-cluster --region us-west-2 
 
+# -------------------- Add Jenkins to Docker group --------------------
+- name: UAdd Jenkins to Docker group
+  hosts: jenkins_server
+  
+  tasks:
+    - name: Add Jenkins to Docker group
+      command: sudo usermod -aG docker jenkins       
+
 # -------------------- Verify Jenkins, Docker, and kubectl --------------------
 
 - name: Verify Jenkins, Docker, and kubectl

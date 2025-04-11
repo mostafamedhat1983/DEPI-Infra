@@ -121,7 +121,7 @@ module "aurora" {
   db_name = var.db_name
   username = var.db_username
   password = var.db_password
-  allowed_security_group_id = module.security_groups.infra_sg_id
+  allowed_security_group_id = module.security_groups.web_sg_id
 
   depends_on = [module.eks]
 }

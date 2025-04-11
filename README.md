@@ -72,6 +72,8 @@ aws eks update-kubeconfig \
 ```bash
 echo "Aurora endpoint: $(terraform output -raw aurora_endpoint)"
 ```
+## Ansible
+ansible-playbook -i inventory my_playbook.yml --ask-vault-pass
 ## 🧹 Cleanup
 ### To destroy all resources:
 ```bash

@@ -106,6 +106,7 @@ module "jenkins" {
   instance_name     = "Jenkins"
   ami               = var.ami
   instance_type     = "t3.medium"
+  disk_size         = 50
   subnet_id         = module.vpc.public_subnets[0]
   security_groups   = [module.security_groups.ssh_sg_id, module.security_groups.infra_sg_id]
   key_name          = module.ssh_key.key_name
@@ -121,8 +122,10 @@ module "aurora" {
   db_name = var.db_name
   username = var.db_username
   password = var.db_password
-  allowed_security_group_id = module.security_groups.web_sg_id
-
+  allowed_security_groups = {
+    "eks-cluster" = module.eks.cluster_security_group_id
+    "web-sg"    = module.security_groups.web_sg_id
+  }
   depends_on = [module.eks]
 }
 
@@ -137,7 +140,7 @@ module "eks" {
   region           = var.region
   key_name         = module.ssh_key.key_name
   min_size         = 1
-  max_size         = 3
+  max_size         = 5
   desired_size     = 1
 
   depends_on = [module.vpc, module.security_groups]

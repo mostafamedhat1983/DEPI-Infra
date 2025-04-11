@@ -23,13 +23,15 @@ resource "aws_security_group" "aurora" {
 }
 
 resource "aws_security_group_rule" "allow_db_connections" {
-  security_group_id = aws_security_group.aurora.id
-  type              = "ingress"
-  from_port         = 3306
-  to_port           = 3306
-  protocol          = "tcp"
-  source_security_group_id = var.allowed_security_group_id
-  description = "Allow MySQL traffic from specific application/infra security groups"
+  for_each = var.allowed_security_groups
+
+  description              = "Allow MySQL from ${each.key}"
+  type                     = "ingress"
+  from_port                = 3306
+  to_port                  = 3306
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.aurora.id
+  source_security_group_id = each.value
 }
 
 resource "aws_security_group_rule" "aurora_egress" {

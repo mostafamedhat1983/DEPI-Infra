@@ -25,8 +25,8 @@ variable "password" {
   sensitive   = true
 }
 
-variable "allowed_security_group_id" {
-  description = "Security Group ID allowed to access the database on port 3306."
-  type        = string
-  default     = ""
+variable "allowed_security_groups" {
+  description = "Map of security group names to their IDs"
+  type        = map(string)
+  default     = {}
 }

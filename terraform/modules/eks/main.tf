@@ -13,13 +13,17 @@ resource "aws_iam_role" "cluster" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "cluster_AmazonEKSClusterPolicy" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
-  role       = aws_iam_role.cluster.name
+locals {
+  cluster_policies = {
+    AmazonEKSClusterPolicy  = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy",
+    AmazonEKSServicePolicy  = "arn:aws:iam::aws:policy/AmazonEKSServicePolicy",
+    AmazonRDSFullAccess     = "arn:aws:iam::aws:policy/AmazonRDSFullAccess"
+  }
 }
 
-resource "aws_iam_role_policy_attachment" "cluster_AmazonEKSServicePolicy" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
+resource "aws_iam_role_policy_attachment" "cluster" {
+  for_each   = local.cluster_policies
+  policy_arn = each.value
   role       = aws_iam_role.cluster.name
 }
 
@@ -33,8 +37,9 @@ resource "aws_eks_cluster" "this" {
   }
 
   depends_on = [
-    aws_iam_role_policy_attachment.cluster_AmazonEKSClusterPolicy,
-    aws_iam_role_policy_attachment.cluster_AmazonEKSServicePolicy
+    aws_iam_role_policy_attachment.cluster["AmazonEKSClusterPolicy"],
+    aws_iam_role_policy_attachment.cluster["AmazonEKSServicePolicy"],
+    aws_iam_role_policy_attachment.cluster["AmazonRDSFullAccess"]
   ]
 
   tags = {
@@ -57,44 +62,31 @@ resource "aws_iam_role" "nodes" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "nodes_AmazonEKSWorkerNodePolicy" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
-  role       = aws_iam_role.nodes.name
+locals {
+  node_policies = {
+    AmazonEKSWorkerNodePolicy              = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+    AmazonEKS_CNI_Policy                   = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
+    AmazonEC2ContainerRegistryReadOnly     = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+    AmazonSSMManagedInstanceCore           = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore",
+    AmazonEC2ContainerRegistryPowerUser    = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryPowerUser",
+    AmazonRDSFullAccess                    = "arn:aws:iam::aws:policy/AmazonRDSFullAccess"
+  }
 }
 
-resource "aws_iam_role_policy_attachment" "nodes_AmazonEKS_CNI_Policy" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
+resource "aws_iam_role_policy_attachment" "nodes" {
+  for_each   = local.node_policies
+  policy_arn = each.value
   role       = aws_iam_role.nodes.name
 }
-
-resource "aws_iam_role_policy_attachment" "nodes_AmazonEC2ContainerRegistryReadOnly" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
-  role       = aws_iam_role.nodes.name
-}
-
-resource "aws_iam_role_policy_attachment" "nodes_AmazonSSMManagedInstanceCore" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
-  role       = aws_iam_role.nodes.name
-}
-
- resource "aws_iam_role_policy_attachment" "nodes_AmazonEC2ContainerRegistryPowerUser" {
-   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryPowerUser"
-   role       = aws_iam_role.nodes.name
- }
-
- resource "aws_iam_role_policy_attachment" "nodes_AmazonRDSFullAccess" {
-   policy_arn = "arn:aws:iam::aws:policy/AmazonRDSFullAccess"
-   role       = aws_iam_role.nodes.name
- }
 
 resource "time_sleep" "wait_for_iam_propagation" {
   depends_on = [
-    aws_iam_role_policy_attachment.nodes_AmazonEKSWorkerNodePolicy,
-    aws_iam_role_policy_attachment.nodes_AmazonEKS_CNI_Policy,
-    aws_iam_role_policy_attachment.nodes_AmazonEC2ContainerRegistryReadOnly,
-    aws_iam_role_policy_attachment.nodes_AmazonSSMManagedInstanceCore,
-    aws_iam_role_policy_attachment.nodes_AmazonEC2ContainerRegistryPowerUser,
-    aws_iam_role_policy_attachment.nodes_AmazonRDSFullAccess
+    aws_iam_role_policy_attachment.nodes["AmazonEKSWorkerNodePolicy"],
+    aws_iam_role_policy_attachment.nodes["AmazonEKS_CNI_Policy"],
+    aws_iam_role_policy_attachment.nodes["AmazonEC2ContainerRegistryReadOnly"],
+    aws_iam_role_policy_attachment.nodes["AmazonSSMManagedInstanceCore"],
+    aws_iam_role_policy_attachment.nodes["AmazonEC2ContainerRegistryPowerUser"],
+    aws_iam_role_policy_attachment.nodes["AmazonRDSFullAccess"]
   ]
   create_duration = "60s"
 }
@@ -107,7 +99,7 @@ resource "aws_eks_node_group" "this" {
 
   capacity_type = "ON_DEMAND"
   ami_type      = "AL2_x86_64"
-  disk_size     = 20
+  disk_size     = 50
   instance_types = [var.node_type]
 
   remote_access {

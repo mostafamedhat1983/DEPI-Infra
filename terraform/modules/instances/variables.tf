@@ -33,3 +33,9 @@ variable "iam_instance_profile" {
   type        = string
   default     = null
 }
+
+variable "disk_size" {
+  description = "Size of the root volume in GB"
+  type        = number
+  default     = 30
+}

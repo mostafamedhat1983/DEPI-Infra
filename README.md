@@ -2,6 +2,7 @@
 
 ![Terraform Version](https://img.shields.io/badge/terraform-%3E%3D4.0-blue)
 ![AWS Provider](https://img.shields.io/badge/AWS-Provider-orange)
+![infra-pic](https://github.com/user-attachments/assets/09db10ea-795c-4326-bdd7-d284bd1c68ca)
 
 This Terraform project provisions a complete AWS infrastructure including:
 - 🛡️ VPC with public and private subnets

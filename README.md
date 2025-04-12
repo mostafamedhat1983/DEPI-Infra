@@ -99,7 +99,7 @@ Start and Enable Docker Service: Ensures Docker starts on boot.
 #### ☸️ kubectl Installation  
 Download and Install kubectl: Installs the Kubernetes CLI tool for managing Kubernetes clusters.
 
-☁️ #### AWS CLI Installation   
+#### ☁️ AWS CLI Installation   
 Install AWS CLI Dependencies: Installs necessary packages for AWS CLI.
 Check and Install AWS CLI: Downloads and installs AWS CLI if not already installed.
 Configure AWS CLI Credentials: Sets up AWS credentials for accessing AWS services.

@@ -2,8 +2,10 @@
 
 ![Terraform Version](https://img.shields.io/badge/terraform-%3E%3D4.0-blue)
 ![AWS Provider](https://img.shields.io/badge/AWS-Provider-orange)
+![image](https://github.com/user-attachments/assets/bc73a337-7e3e-46ca-8357-dd0b899da829)
+
 ![infra-pic](https://github.com/user-attachments/assets/09db10ea-795c-4326-bdd7-d284bd1c68ca)
-![image](https://github.com/user-attachments/assets/873af0a8-5617-4452-99ed-77aeae532b6c)
+
 
 
 This Terraform project provisions a complete AWS infrastructure including:

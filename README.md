@@ -1,6 +1,8 @@
 # AWS Infrastructure as Code (IaC) with Terraform
 
+![image](https://github.com/user-attachments/assets/ed7cadce-4765-48f7-9e56-ae7730e8983c)
 ![Terraform Version](https://img.shields.io/badge/terraform-%3E%3D4.0-blue)
+![image](https://github.com/user-attachments/assets/db884d2d-1b36-40bd-83a8-1e30c47c1f0c)
 ![AWS Provider](https://img.shields.io/badge/AWS-Provider-orange)
 ![image](https://github.com/user-attachments/assets/bc73a337-7e3e-46ca-8357-dd0b899da829)
 

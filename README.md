@@ -5,7 +5,7 @@
 ![AWS Provider](https://img.shields.io/badge/AWS-Provider-orange)
 ![image](https://github.com/user-attachments/assets/3134327c-49d4-4054-a407-7770c3fd70b9)
 ![image](https://github.com/user-attachments/assets/cc691f0d-73fe-4142-becc-bec3f68a4b28)
-![image](https://github.com/user-attachments/assets/4fb9395e-e141-4cd8-b941-fdf196a056dc)
+![image](https://github.com/user-attachments/assets/33d186b1-8933-4a1c-b965-e10d7f77ea90)
 
 ![infra-pic](https://github.com/user-attachments/assets/09db10ea-795c-4326-bdd7-d284bd1c68ca)
 

@@ -1,11 +1,11 @@
 # AWS Infrastructure as Code (IaC) with Terraform
 
 ![image](https://github.com/user-attachments/assets/ed7cadce-4765-48f7-9e56-ae7730e8983c)
-![image](https://github.com/user-attachments/assets/db884d2d-1b36-40bd-83a8-1e30c47c1f0c)
-![AWS Provider](https://img.shields.io/badge/AWS-Provider-orange)
-![image](https://github.com/user-attachments/assets/3f7a0133-e480-4d70-83b8-51213fa78e13)
-![image](https://github.com/user-attachments/assets/cc691f0d-73fe-4142-becc-bec3f68a4b28)
-![image](https://github.com/user-attachments/assets/33d186b1-8933-4a1c-b965-e10d7f77ea90)
+![image](https://github.com/user-attachments/assets/16c71aa5-9661-4245-a98c-b4377a5d7c17)
+![image](https://github.com/user-attachments/assets/0ccc7b69-8ba1-4424-b3b3-2b81445ba82d)
+![image](https://github.com/user-attachments/assets/ec963032-758f-441e-990f-4b0fba0f20c7)
+![image](https://github.com/user-attachments/assets/9cac409b-6c26-408f-976b-0730744da6a5)
+![image](https://github.com/user-attachments/assets/f5883e38-b51e-4e95-bc87-5246e6a0e1e0)
 
 ![infra-pic](https://github.com/user-attachments/assets/81b12b59-42a2-4848-a4e1-f352deb8beb3)
 

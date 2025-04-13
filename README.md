@@ -3,7 +3,7 @@
 ![image](https://github.com/user-attachments/assets/ed7cadce-4765-48f7-9e56-ae7730e8983c)
 ![image](https://github.com/user-attachments/assets/db884d2d-1b36-40bd-83a8-1e30c47c1f0c)
 ![AWS Provider](https://img.shields.io/badge/AWS-Provider-orange)
-![image](https://github.com/user-attachments/assets/3134327c-49d4-4054-a407-7770c3fd70b9)
+![image](https://github.com/user-attachments/assets/3f7a0133-e480-4d70-83b8-51213fa78e13)
 ![image](https://github.com/user-attachments/assets/cc691f0d-73fe-4142-becc-bec3f68a4b28)
 ![image](https://github.com/user-attachments/assets/33d186b1-8933-4a1c-b965-e10d7f77ea90)
 

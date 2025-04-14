@@ -86,7 +86,8 @@ Navigate to ansible folder and run the following command
 ansible-playbook -i inventory my_playbook.yml --ask-vault-pass
 ```
 ### 🔐 This Ansible playbook utilizes Ansible Vault to securely store the AWS Access Key and Secret Access Key, ensuring sensitive information is encrypted and protected. 🛡️
-This Ansible playbook is designed to automate the installation and configuration of Jenkins, Docker, kubectl, and AWS CLI on a server. It ensures that all necessary components are installed, configured, and verified for a seamless CI/CD pipeline setup. Below is a breakdown of the tasks included in this playbook:
+
+## Below is a breakdown of the tasks included in this playbook:
 
 ## 📦 Jenkins Installation and Configuration
 - **☕ Install Java 17 (OpenJDK)**: Required for Jenkins.

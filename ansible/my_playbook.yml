@@ -227,7 +227,7 @@
       command: aws eks update-kubeconfig --name python-app-cluster --region us-west-2 
 
 # -------------------- Install Helm --------------------
----
+
 - name: Install Helm on Ubuntu 24.04
   hosts: jenkins_server
   become: true

@@ -117,6 +117,18 @@ ansible-playbook -i inventory my_playbook.yml --ask-vault-pass
 ## 👥 Add Jenkins to Docker Group
 - **👥 Add Jenkins to Docker Group**: Grants Jenkins user permissions to run Docker commands.
 
+## 🛠️ Install Helm
+
+1. 🔄 **Update apt cache**: Refreshes package index.
+2. 📦 **Install Dependencies**: Installs necessary packages like `curl` and `gnupg`.
+3. 📁 **Create Directory**: Sets up `/tmp/helm` for downloads.
+4. 📥 **Download Helm**: Fetches Helm version `v3.14.0`.
+5. 📂 **Extract Helm**: Unpacks the tarball.
+6. 🚚 **Move Binary**: Places Helm in `/usr/local/bin`.
+7. ✅ **Verify Installation**: Runs `helm version` to check.
+8. 🔍 **Display Version**: Shows installed Helm version.
+9. 🧹 **Clean Up**: Removes temporary files.
+
 ## ✅ Verification of Installations
 - **🔍 Verify Docker Installation**: Checks Docker version and service status.
 - **🔍 Verify kubectl Installation**: Checks kubectl version.

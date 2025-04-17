@@ -85,7 +85,7 @@ echo "Aurora endpoint: $(terraform output -raw aurora_endpoint)"
 ## Ansible
 Navigate to ansible folder and run the following command  
 ```bash
-ansible-playbook -i inventory my_playbook.yml --ask-vault-pass
+ansible-playbook -i inventory my_playbook.yml --vault-password-file=./pass
 ```
 ### 🔐 This Ansible playbook utilizes Ansible Vault to securely store the AWS Access Key and Secret Access Key, ensuring sensitive information is encrypted and protected. 🛡️
 
